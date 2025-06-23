@@ -1,0 +1,35 @@
+# Aktifkan RewriteEngine
+RewriteEngine On
+
+# Pengaturan dasar untuk root directory
+# Jika URL adalah direktori, coba cari index.html atau index.php
+DirectoryIndex index.php index.html
+
+# --- Aturan untuk Menghilangkan Ekstensi .html ---
+# Alihkan (redirect) URL dengan .html ke versi tanpa .html (301 Permanent)
+# Ini bagus untuk SEO karena memberi tahu mesin pencari bahwa halaman sudah pindah permanen
+RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC]
+RewriteRule ^ /%1 [NC,L,R=301]
+
+# Secara internal, jika ada request tanpa ekstensi, cek apakah ada file .html yang sesuai
+# Contoh: Jika request "/tentang", server akan mencari "tentang.html"
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html [NC,L]
+
+# --- Aturan untuk Menghilangkan Ekstensi .php ---
+# Alihkan (redirect) URL dengan .php ke versi tanpa .php (301 Permanent)
+# Ini juga bagus untuk SEO
+RewriteCond %{THE_REQUEST} /([^.]+)\.php [NC]
+RewriteRule ^ /%1 [NC,L,R=301]
+
+# Secara internal, jika ada request tanpa ekstensi, cek apakah ada file .php yang sesuai
+# Contoh: Jika request "/login", server akan mencari "login.php"
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [NC,L]
+
+# --- Aturan Umum: Menangani File atau Direktori yang Tidak Ada ---
+# Jika request bukan untuk file atau direktori yang ada, arahkan ke 404 error
+# Kamu bisa menyesuaikan ini jika punya halaman 404 custom
+ErrorDocument 404 /404.html

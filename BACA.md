@@ -1,0 +1,1 @@
+> jadi gini ntar pas produk sc di bagian detail/desk arahin aja ke saluran utama ku, soalnya panjang info sc nya, nah untuk web nya ga make kupon,make keranjang untum struk nya udh gw sedia in disitu, terus pas buy panel kan udah tf tuh nah disitu kasi peringatan jangan refresh website, terus pas udah di tf, muncul panel nya, bisa kan,klo ada yg kurang tanya aja
